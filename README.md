@@ -4,7 +4,7 @@ _Requires Unity 5.5+_
 
 ~ ~ ~
 
-This is an adaptable tooltip script and asssociation tools for use in games and applications.
+This is an adaptable tooltip script (+pool and prefab) for use in games and applications.
 
 ###### Please note: this has not been thoroughly tested since being adapted from my personal project. Let me know if you encounter any issues.
 
