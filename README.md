@@ -1,6 +1,6 @@
 #Pat Scott's Utility Scripts
 
-~ ~ ~
+
 
 A collection of C# scripts for use in Unity games and apps that you might find useful.
 
@@ -12,7 +12,7 @@ Basically a bunch of shit I find super useful to reduce reinventing the wheel. M
 
 **CoroutineUtil** has a couple of nice shorthand coroutines.
 
-`DoAfter()` is great for basically everything. It's a shorthand Coroutine-based Invoke that can call any action(s) after a number of seconds (realtime or sim) or after a give condition.
+`DoAfter()` is great for basically everything. It's a shorthand Coroutine-based Invoke-alike (no reflection) that can call any action(s) after a number of seconds (realtime or sim) or after a give condition.
 
 ######Example: `Coroutine myCoroutine = StartCoroutine(CoroutineUtil.DoAfter(() => Foo(), () => myBoolCondition);` will execute Foo() after myBoolCondition is true, and saves this call as myCoroutine for easy reference later.
 
