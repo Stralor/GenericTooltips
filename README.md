@@ -52,7 +52,7 @@ Makes in-game mouse clicks pick objects up and put them down wherever they don't
 
 ######Note: this class makes calls to a script I haven't yet included in this collection (AudioClipOrganizer). Please replace those lines with your own SFX calls.
 
-**Snap_X_** are useful if you want objects to snap into place. Provided options are "grid" (world transform increments) or "nodes" (transforms).
+**SnapBase** and its extensions are useful if you want objects to snap into place. Provided options are "grid" (world transform increments) or "nodes" (transforms).
 
 ######Note: you'll have to define a list of valid nodes and edit the code to reference it, if you include SnapToNodes in your assets.
 
