@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ColorPalette : MonoBehaviour
 {
@@ -8,14 +9,40 @@ public class ColorPalette : MonoBehaviour
 	 */
 	public static ColorPalette cp;
 
-	//Change these as needed by your palette
-	/**Higher numbers are lighter.
-	 * 0s are black replacements.
-	 * 1s are the most saturated.
-	 * 2s are the base colors.
-	 * 3s are bright!
-	 * 4s are pale (great for text). */
-	public Color blue0, blue1, blue2, blue3, blue4, yellow0, yellow1, yellow2, yellow3, yellow4, red0, red1, red2, red3, red4, blk, gry1, gry2, gry3, wht;
+	public List<ColorProfile> colorList = new List<ColorProfile> ();
+
+	/**Searches 'distance' values for a matching color. If 'searchDown', will use 'colorValue' as the starting maximum value, else will use 'colorValue' as the starting minimum value.
+	 * Use that to search for nearest light or dark value, respectively.
+	 * Returns white if any color not found in chroma channel
+	 */
+	public static Color GetColor(ColorProfile.Chroma channel, int colorValue, int distance = 10, bool searchDown = true)
+	{
+		//Result
+		ColorProfile color = null;
+
+		//Only relevant colors
+		var channelColors = cp.colorList.FindAll (obj => obj != null && obj.channel == channel);
+
+		//Find
+		for (int i = 0; i < distance; i++)
+		{
+			//The value we want from the ColorProfile
+			int valueToMatch = searchDown ? colorValue - i : colorValue + i;
+
+			//Try to match
+			color = channelColors.Find (obj => obj.value == valueToMatch);
+
+			//Match?
+			if (color != null)
+				break;
+		}
+
+		//Return result
+		if (color != null)
+			return color.color;
+		else
+			return Color.white;
+	}
 
 	public static string ColorToHex(Color32 color)
 	{

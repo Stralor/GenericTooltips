@@ -19,7 +19,7 @@ public class Placement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 	/** Is near enough to another piece to lock on grid? */
 	public bool isConnected, doesNotNeedConnections;
 
-	public bool canRotate = true;
+	public bool canRotate = false;
 
 	public bool blockedByNonPlacements = true;
 
@@ -192,7 +192,7 @@ public class Placement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 	 */
 	public bool Place()
 	{
-		if (isSelectable && !othersToSyncWith.Exists(obj => obj != null && obj.isBlocked))
+		if (PlacementManager.canPlace && isSelectable && !othersToSyncWith.Exists(obj => obj != null && obj.isBlocked))
 		{
 			PlaceAction();
 
@@ -216,7 +216,7 @@ public class Placement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 	 */
 	public bool PickUp()
 	{
-		if (isSelectable)
+		if (PlacementManager.canPlace && isSelectable)
 		{
 			PickUpAction();
 
@@ -330,19 +330,19 @@ public class Placement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 			//Blocked. Placement invalid. (Also check sync)
 			if (isBlocked || othersToSyncWith.Exists(obj => obj != null && obj.isBlocked))
 			{
-				Color color = ColorPalette.cp.red4;
+				Color color = ColorPalette.GetColor (ColorProfile.Chroma.Red, 10);
 				color.a = unplaceableAlpha;
 				sprites.ForEach(obj => obj.color = color);
 			}
 			//Connected, not blocked. Placement valid. (Also check sync)
 			else if ((isConnected || doesNotNeedConnections) && !othersToSyncWith.Exists(obj => obj != null && (!obj.isConnected && !obj.doesNotNeedConnections)))
 			{
-				sprites.ForEach(obj => obj.color = ColorPalette.cp.blue4);
+				sprites.ForEach(obj => obj.color = ColorPalette.GetColor (ColorProfile.Chroma.Blue, 10));
 			}
 			//Unconnected, not blocked. Placement not quite valid.
 			else
 			{
-				Color color = ColorPalette.cp.yellow4;
+				Color color = ColorPalette.GetColor (ColorProfile.Chroma.Yellow, 10);
 				color.a = unplaceableAlpha;
 				sprites.ForEach(obj => obj.color = color);
 			}
@@ -353,9 +353,9 @@ public class Placement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 			foreach (var t in sprites)
 			{
 				if (t.name == "Outline")
-					t.color = ColorPalette.cp.blk;
+					t.color = ColorPalette.GetColor (ColorProfile.Chroma.Neutral, 0);
 				else
-					t.color = ColorPalette.cp.wht;
+					t.color = ColorPalette.GetColor (ColorProfile.Chroma.Neutral, 10);
 			}
 		}
 

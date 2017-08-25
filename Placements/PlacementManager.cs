@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public static class PlacementManager
 {
+	public static bool canPlace = true;
+
 	public static Placement currentPlacement;
 
 	public static System.Action<Placement> onPlace, cannotPlace, onClear, onPickUp, onLongPress, onRightClick, onAfterPlace;
@@ -23,7 +25,7 @@ public static class PlacementManager
 			if (!currentPlacement.isBlocked && (currentPlacement.isConnected || currentPlacement.doesNotNeedConnections) && currentPlacement.Place())
 			{
 				//PLACE SFX
-				AudioClipOrganizer.aco.PlayAudioClip("Construct", null);
+//				AudioClipOrganizer.aco.PlayAudioClip("Construct", null);
 
 				//Do any other actions needed when we place
 				if (onPlace != null)
@@ -33,7 +35,7 @@ public static class PlacementManager
 			else if (!currentPlacement.isBlocked && !currentPlacement.isConnected)
 			{
 				//CLEAR SFX
-				AudioClipOrganizer.aco.PlayAudioClip("Pop", null);
+//				AudioClipOrganizer.aco.PlayAudioClip("Pop", null);
 
 				//Do any other actions needed when we clear
 				if (onClear != null)
@@ -43,7 +45,7 @@ public static class PlacementManager
 			else
 			{
 				//INVALID SFX
-				AudioClipOrganizer.aco.PlayAudioClip("Invalid", null);
+//				AudioClipOrganizer.aco.PlayAudioClip("Invalid", null);
 
 				//Do any actions for when we can't place
 				if (cannotPlace != null)
@@ -64,7 +66,7 @@ public static class PlacementManager
 				{
 					currentPlacement = target;
 
-					AudioClipOrganizer.aco.PlayAudioClip("Repair", null);
+//					AudioClipOrganizer.aco.PlayAudioClip("Repair", null);
 
 					//Let stuff know what we picked up
 					if (onPickUp != null)
@@ -93,7 +95,7 @@ public static class PlacementManager
 		//Rotate
 		if (target == currentPlacement && !currentPlacement.isPlaced && currentPlacement.canRotate)
 		{
-			AudioClipOrganizer.aco.PlayAudioClip("Beep", null);
+//			AudioClipOrganizer.aco.PlayAudioClip("Beep", null);
 
 			var rot = (currentPlacement.mainObject.transform.localEulerAngles.z - 90) % 360;
 			currentPlacement.mainObject.transform.localEulerAngles = new Vector3(0, 0, rot);
