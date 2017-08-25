@@ -14,7 +14,7 @@ Basically a bunch of shit I find super useful to reduce reinventing the wheel. M
 
 *As with anything Coroutines, it's best used in cases of "fire and forget". Be wary of anything that needs tracking or calls back into the game.*
 
-######Example: `Coroutine myCoroutine = StartCoroutine(CoroutineUtil.DoAfter(() => Foo(), () => myBoolCondition);` will execute Foo() after myBoolCondition is true, and saves this call as myCoroutine for easy reference later.
+###### Example: `Coroutine myCoroutine = StartCoroutine(CoroutineUtil.DoAfter(() => Foo(), () => myBoolCondition);` will execute Foo() after myBoolCondition is true, and saves this call as myCoroutine for easy reference later.
 
 Around 5.4 or so, `WaitForRealSeconds()` became no longer necessary, as Unity now has `WaitForSecondsRealtime()`. It's still in the class for 4.x and 5.early projects.
 
@@ -22,11 +22,11 @@ Around 5.4 or so, `WaitForRealSeconds()` became no longer necessary, as Unity no
 
 **ExtendedScriptableObjectDrawer** is a sweeeet little editor script for easier ScriptableObject management in Inspector, made and given to the public domain by the fine folks at Inkle. I've included it here because I love it so much.
 
-###Layout
+### Layout
 
 Contains just **CenterGroup** which adjusts all the rigidbodies childed to the GameObject it's on so they're averaged around zero (`UpdateGroupPosition()`, which also returns a Vector2 so you can match other objects' children to it `MoveChildrenRigidbodies`). I use it to keep player-built objects around a unified center point in my camera. For use in 2D.
 
-###Misc
+### Misc
 
 These are maybe useful, but not quite **Convenience** level.
 
