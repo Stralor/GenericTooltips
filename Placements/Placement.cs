@@ -52,8 +52,6 @@ public class Placement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
 	bool newPointerDown = false, justPlaced = false, mouseHere = false;
 
-	GameObject waitCircle;
-
 
 	/*
 	 * TRIGGER EVENTS
@@ -67,11 +65,6 @@ public class Placement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 		if (PlacementManager.canLongPress != null && PlacementManager.canLongPress.Invoke(this))
 		{
 			StartCoroutine(LongClickTimer());
-
-			//Special-ass VFX code if long-presses are valid
-			waitCircle = WaitCircleManager.GetFreshCircle();
-			waitCircle.transform.SetParent(transform);
-			waitCircle.GetComponent<WaitCircle>().Activate(PlacementManager.longPressTime);
 		}
 	}
 
@@ -88,12 +81,6 @@ public class Placement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
 	public void OnPointerUp(PointerEventData eventData)
 	{
-		//Clear old waitcircle
-		if (waitCircle)
-		{
-			waitCircle.SetActive(false);
-			waitCircle = null;
-		}
 
 		if (eventData.button == PointerEventData.InputButton.Left)
 		{
@@ -330,19 +317,19 @@ public class Placement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 			//Blocked. Placement invalid. (Also check sync)
 			if (isBlocked || othersToSyncWith.Exists(obj => obj != null && obj.isBlocked))
 			{
-				Color color = ColorPalette.GetColor (ColorProfile.Chroma.Red, 10);
+				Color color = ColorPalette.GetColor(ColorProfile.Chroma.Red, 10);
 				color.a = unplaceableAlpha;
 				sprites.ForEach(obj => obj.color = color);
 			}
 			//Connected, not blocked. Placement valid. (Also check sync)
 			else if ((isConnected || doesNotNeedConnections) && !othersToSyncWith.Exists(obj => obj != null && (!obj.isConnected && !obj.doesNotNeedConnections)))
 			{
-				sprites.ForEach(obj => obj.color = ColorPalette.GetColor (ColorProfile.Chroma.Blue, 10));
+				sprites.ForEach(obj => obj.color = ColorPalette.GetColor(ColorProfile.Chroma.Blue, 10));
 			}
 			//Unconnected, not blocked. Placement not quite valid.
 			else
 			{
-				Color color = ColorPalette.GetColor (ColorProfile.Chroma.Yellow, 10);
+				Color color = ColorPalette.GetColor(ColorProfile.Chroma.Yellow, 10);
 				color.a = unplaceableAlpha;
 				sprites.ForEach(obj => obj.color = color);
 			}
@@ -353,9 +340,9 @@ public class Placement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 			foreach (var t in sprites)
 			{
 				if (t.name == "Outline")
-					t.color = ColorPalette.GetColor (ColorProfile.Chroma.Neutral, 0);
+					t.color = ColorPalette.GetColor(ColorProfile.Chroma.Neutral, 0);
 				else
-					t.color = ColorPalette.GetColor (ColorProfile.Chroma.Neutral, 10);
+					t.color = ColorPalette.GetColor(ColorProfile.Chroma.Neutral, 10);
 			}
 		}
 

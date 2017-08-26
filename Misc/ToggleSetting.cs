@@ -34,9 +34,9 @@ public class ToggleSetting : MonoBehaviour
 
 		//Explicit text
 		if (value == 1)
-			GetComponentInChildren<UnityEngine.UI.Text>().text = displayName + ": " + ColorPalette.ColorText(ColorPalette.cp.blue4, "On");
+			GetComponentInChildren<UnityEngine.UI.Text>().text = displayName + ": " + ColorPalette.ColorText(ColorPalette.GetColor(ColorProfile.Chroma.Blue, 10), "On");
 		else
-			GetComponentInChildren<UnityEngine.UI.Text>().text = displayName + ": " + ColorPalette.ColorText(ColorPalette.cp.red4, "Off");
+			GetComponentInChildren<UnityEngine.UI.Text>().text = displayName + ": " + ColorPalette.ColorText(ColorPalette.GetColor(ColorProfile.Chroma.Red, 10), "Off");
 
 	}
 
